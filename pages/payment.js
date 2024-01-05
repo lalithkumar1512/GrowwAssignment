@@ -106,7 +106,8 @@ const PaymentPage = () => {
             style={{ display: "flex", alignItems: "center", padding: "3vmin" }}
           >
             <img
-              src={merchantMetadata.merchantLogo}
+              //src={merchantMetadata.merchantLogo}
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSzkiv6IViZX6uViea97vb4eGEAY-jDAm-Rml8EwhSOw&s"
               alt={merchantMetadata.merchantName}
               style={{
                 maxWidth: "7vmin",
