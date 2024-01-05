@@ -27,20 +27,10 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/orderconfirmation": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/orderconfirmation.js"
-    ],
     "/payment": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/payment.js"
-    ],
-    "/thanks": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/thanks.js"
     ]
   },
   "ampFirstPages": []

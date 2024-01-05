@@ -1,7 +1,6 @@
 // components/CardPaymentForm.js
-import React from "react";
+import {React, useState} from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
-import PaymentSuccessPopup from "./paymentsucesspopup";
 const CardPaymentForm = () => {
   const [showPaymentSuccess, setShowPaymentSuccess] = useState(false);
   const stripe = useStripe();
