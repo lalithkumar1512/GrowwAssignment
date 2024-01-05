@@ -1,0 +1,59 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    Segoe UI,
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    Fira Sans,
+    Droid Sans,
+    Helvetica Neue,
+    sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+
+/* Add responsive styling as needed */
+.checkout-container {
+  flex-direction: column;
+}
+
+.theme-layer{
+  flex-direction: column;
+}
+
+
+.summary-section,
+.promo-section,
+.order-total-section,
+.cta-section {
+  margin-bottom: 20px;
+}
+
+ul {
+  list-style-type: none;
+}
+li {
+  border: 1px solid #ccc;
+  /* padding: 1px; */
+  /* margin-bottom: 10px; */
+}
+
+
+@media (max-width: 600px) {
+  /* Add responsive styles here */
+}
