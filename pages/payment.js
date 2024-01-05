@@ -3,7 +3,6 @@ import { useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import useOrderStore from "../store/store";
-import CardPaymentForm from "./cardpaymentform";
 import { useRouter } from "next/router";
 const stripePromise = loadStripe("YOUR_STRIPE_PUBLIC_KEY");
 import PaymentSuccessPopup from "./paymentsucesspopup";
@@ -75,7 +74,6 @@ const PaymentPage = () => {
     // You may want to navigate to another page or perform additional actions here
   };
 
-  // Placeholder for CardPaymentForm component
 
   return (
     <div
@@ -356,8 +354,6 @@ const PaymentPage = () => {
                     required
                     style={{ marginBottom: "1vmin", width: "20vmin" }}
                   />
-                  {/* <CardPaymentForm />
-                   */}
                   <form onSubmit={handleCardSubmit}>
                     {/* <CardElement id="cardElement" options={{ style: { base: { fontSize: '2vmin' } } }} /> */}
                     <button
