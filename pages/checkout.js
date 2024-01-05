@@ -282,12 +282,14 @@ const CheckoutPage = () => {
             minHeight: "100vh",
           }}
         >
+        
           <div
             className="merchant-info"
             style={{ display: "flex", alignItems: "center", padding: "3vmin" }}
           >
             <img
-              src={merchantMetadata.merchantLogo}
+              // src={merchantMetadata.merchantLogo}
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSzkiv6IViZX6uViea97vb4eGEAY-jDAm-Rml8EwhSOw&s"
               alt={merchantMetadata.merchantName}
               style={{
                 maxWidth: "7vmin",
@@ -298,7 +300,7 @@ const CheckoutPage = () => {
             <h1
               style={{
                 margin: "0",
-                fontSize: "5vmin",
+                fontSize: "3vmax",
                 color: themeStyles["--background"],
               }}
             >
@@ -308,7 +310,7 @@ const CheckoutPage = () => {
           <h1
             style={{
               margin: "0",
-              fontSize: "3.5vmin",
+              fontSize: "3vmax",
               color: themeStyles["--background"],
               textAlign: "center",
             }}
@@ -331,31 +333,58 @@ const CheckoutPage = () => {
                 <h2
                   style={{
                     margin: "0",
-                    fontSize: "3vmin",
+                    fontSize: "2.5vmax",
                     color: themeStyles["--background"],
                   }}
                 >
                   Delivery Detail
                 </h2>
-                <p style={{ color: themeStyles["--background"] }}>
+                <p
+                  style={{
+                    color: themeStyles["--background"],
+                    fontSize: "2vmax",
+                  }}
+                >
                   163 Seymour Junction, Flatleyborough, FL 83131-5020<br></br>
-                  Phone: 9346184951
                 </p>
+                <div style={{display:'flex',flexDirection:'row'}}>
+                <p style={{fontSize:'1.5vmax'}}>&#128222;</p>
+                <input
+                  type="number"
+                  id="amount"
+                  value="9346184951"
+                  maxLength="2vmin"
+                  onChange={(e) =>
+                    setUpiDetails({ ...upiDetails, amount: e.target.value })
+                  }
+                  required
+                  readOnly // Add the readOnly attribute here
+                  style={{
+                    marginBottom: "1vmin",
+                    maxLength: "2vmin",
+                    fontSize: "2vmax"
+                  }}
+                />
+                
+                </div>
+                
               </div>
               <div
                 className="foreground"
                 style={{ display: "flex", flexDirection: "column" }}
               >
+                <br></br>
                 <div className="summary-section">
                   <h2
                     style={{
                       margin: "0",
-                      fontSize: "3vmin",
+                      fontSize: "2.5vmax",
                       color: themeStyles["--background"],
                     }}
                   >
                     Order Details
                   </h2>
+                  <br></br>
                   <ul
                     style={{
                       listStyleType: "none",
@@ -367,7 +396,7 @@ const CheckoutPage = () => {
                         style={{
                           display: "flex",
                           flexDirection: "column",
-                          marginTop: "2vmin",
+                          marginTop: "2vmax",
                         }}
                       >
                         <li key={product.id}>
@@ -375,15 +404,15 @@ const CheckoutPage = () => {
                             style={{
                               display: "flex",
                               flexDirection: "row",
-                              gap: "1vmin",
+                              gap: "1vmax",
                             }}
                           >
                             <img
                               src={product.image}
                               alt={product.title}
                               style={{
-                                width: "10vmin",
-                                height: "10vmin",
+                                width: "7vmax",
+                                height: "7vmax",
                                 marginleft: "0",
                                 marginRight: "3vmin",
                               }}
@@ -398,7 +427,7 @@ const CheckoutPage = () => {
                               <span
                                 style={{
                                   color: themeStyles["--background"],
-                                  fontSize: "3vmin",
+                                  fontSize: "1.25vmax",
                                 }}
                               >
                                 {product.title}
@@ -406,7 +435,7 @@ const CheckoutPage = () => {
                               <span
                                 style={{
                                   color: themeStyles["--background"],
-                                  fontSize: "3vmin",
+                                  fontSize: "1.75vmax",
                                 }}
                               >
                                 ${product.price}
@@ -417,20 +446,20 @@ const CheckoutPage = () => {
                                 display: "flex",
                                 flexDirection: "row",
                                 marginLeft: "auto",
-                                gap: "2vmin",
+                                gap: "2vmax",
                               }}
                             >
                               <span
                                 style={{
                                   color: themeStyles["--background"],
-                                  fontSize: "3vmin",
+                                  fontSize: "2.5vmax",
                                 }}
                               >
                                 x{product.quantity}
                               </span>
                               <button
                                 style={{
-                                  height: "6vmin",
+                                  height: "3vmax",
                                   backgroundColor: themeStyles["--foreground"],
                                   border: "0",
                                   color: themeStyles["--background"],
@@ -441,7 +470,7 @@ const CheckoutPage = () => {
                               </button>
                               <button
                                 style={{
-                                  height: "6vmin",
+                                  height: "3vmax",
                                   backgroundColor: themeStyles["--foreground"],
                                   border: "0",
                                   color: themeStyles["--background"],
@@ -457,14 +486,16 @@ const CheckoutPage = () => {
                     ))}
                   </ul>
                 </div>
+                <br></br>
                 <h2
                   style={{
                     color: themeStyles["--background"],
-                    fontSize: "3vmin",
+                    fontSize: "2.5vmax",
                   }}
                 >
                   Promo Code
                 </h2>
+                <br></br>
                 <div
                   className="promo-section"
                   style={{
@@ -475,7 +506,7 @@ const CheckoutPage = () => {
                 >
                   <select
                     onChange={(e) => setPromoCode(e.target.value)}
-                    style={{ flexGrow: 1 }}
+                    style={{ flexGrow: 1 , fontSize: '2vmax'}}
                   >
                     <option value="1">First - 10% off</option>
                     <option value="2">Value - 20% off</option>
@@ -518,10 +549,11 @@ const CheckoutPage = () => {
                   className="order-total-section"
                   style={{ display: "flex", flexDirection: "column" }}
                 >
+
                   <h2
                     style={{
                       color: themeStyles["--background"],
-                      fontSize: "3vmin",
+                      fontSize: "2.5vmax",
                     }}
                   >
                     Order Summary
@@ -530,7 +562,7 @@ const CheckoutPage = () => {
                     <span
                       style={{
                         color: themeStyles["--background"],
-                        fontSize: "3vmin",
+                        fontSize: "2vmax",
                       }}
                     >
                       Order amount: ${orderamount}
@@ -539,7 +571,7 @@ const CheckoutPage = () => {
                   <span
                     style={{
                       color: themeStyles["--background"],
-                      fontSize: "3vmin",
+                      fontSize: "2vmax",
                     }}
                   >
                     Discount: ${total - orderamount}
@@ -557,7 +589,7 @@ const CheckoutPage = () => {
                   <h2
                     style={{
                       color: themeStyles["--background"],
-                      fontSize: "3vmin",
+                      fontSize: "2vmax",
                       marginRight: "auto",
                     }}
                   >
@@ -565,7 +597,7 @@ const CheckoutPage = () => {
                   </h2>
                   <button
                     style={{
-                      height: "6vmin",
+                      height: "4vmax",
                       backgroundColor: themeStyles["--primary"],
                       border: "0",
                       color: themeStyles["--primary-foreground"],
