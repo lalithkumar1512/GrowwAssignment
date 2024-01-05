@@ -340,8 +340,27 @@ const CheckoutPage = () => {
                 </h2>
                 <p style={{ color: themeStyles["--background"] }}>
                   163 Seymour Junction, Flatleyborough, FL 83131-5020<br></br>
-                  Phone: 9346184951
                 </p>
+                    <div style={{display:'flex',flexDirection:'row'}}>
+                <p style={{fontSize:'1.5vmax'}}>&#128222;</p>
+                <input
+                  type="number"
+                  id="amount"
+                  value="9346184951"
+                  maxLength="2vmin"
+                  onChange={(e) =>
+                    setUpiDetails({ ...upiDetails, amount: e.target.value })
+                  }
+                  required
+                  readOnly // Add the readOnly attribute here
+                  style={{
+                    marginBottom: "1vmin",
+                    maxLength: "2vmin",
+                    fontSize: "2vmax"
+                  }}
+                />
+                
+                </div>
               </div>
               <div
                 className="foreground"
