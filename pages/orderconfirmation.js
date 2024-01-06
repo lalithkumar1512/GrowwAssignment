@@ -1,7 +1,5 @@
-// pages/checkout.js
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { ACTION_REFRESH } from "next/dist/client/components/router-reducer/router-reducer-types";
 import { useRouter } from "next/router";
 import useOrderStore from "../store/store";
 
@@ -22,36 +20,25 @@ const OrderConfirmationPage = () => {
     setTotal,
     setOrderAmount,
   } = useOrderStore();
-  //   const [orderDetails, setOrderDetails] = useState(null);
-  //   const [merchantMetadata, setMerchantMetadata] = useState(null);
-  //   const [promoCode, setPromoCode] = useState('1');
-  //   const [appliedPromo, setAppliedPromo] = useState(false);
-  //   const [total, setTotal] = useState(0);
-  //   const [orderamount,setOrderAmount] = useState(0);
   const handleReload = () => {
     router.reload();
   };
 
   useEffect(() => {
-    // Function to clear localStorage
     const clearLocalStorage = () => {
       localStorage.clear();
     };
 
-    // Attach the clearLocalStorage function to the beforeunload event
     window.addEventListener("beforeunload", clearLocalStorage);
 
-    // Clean up the event listener when the component unmounts
     return () => {
       window.removeEventListener("beforeunload", clearLocalStorage);
     };
   }, []);
 
   useEffect(() => {
-    // localStorage.clear();
     const fetchOrderDetails = async () => {
       try {
-        // Check if order details are already cached
         const cachedOrderDetails = localStorage.getItem("orderDetails");
         const cachedMerchantMetadata = localStorage.getItem("merchantMetaData");
         const total = localStorage.getItem("total");
@@ -61,7 +48,6 @@ const OrderConfirmationPage = () => {
           setMerchantMetadata(parsedMerchantMetaData);
           setOrderDetails(parsedOrderDetails);
 
-          // Calculate total and order amount based on cached order details
           const cachedTotal = Math.round(
             parsedOrderDetails.products.reduce(
               (acc, product) => acc + product.price * product.quantity,
@@ -71,7 +57,6 @@ const OrderConfirmationPage = () => {
           setTotal(total);
           setOrderAmount(cachedTotal);
         } else {
-          // Fetch order details from the API
           const response = await axios.get(
             "https://groww-intern-assignment.vercel.app/v1/api/order-details"
           );
@@ -80,17 +65,14 @@ const OrderConfirmationPage = () => {
             "https://groww-intern-assignment.vercel.app/v1/api/merchant-metadata"
           );
           const newMerchantMetaData = response1.data;
-          // Update state with the new order details
           setOrderDetails(newOrderDetails);
           setMerchantMetadata(newMerchantMetaData);
-          // Cache the new order details
           localStorage.setItem("orderDetails", JSON.stringify(newOrderDetails));
           localStorage.setItem(
             "merchantMetaData",
             JSON.stringify(newMerchantMetaData)
           );
 
-          // Calculate total and order amount based on the new order details
           const newTotal = Math.round(
             newOrderDetails.products.reduce(
               (acc, product) => acc + product.price * product.quantity,
@@ -106,149 +88,9 @@ const OrderConfirmationPage = () => {
       }
     };
 
-    // Fetch order details and handle caching
     fetchOrderDetails();
 
-    // Fetch merchant metadata for theming
-    // axios.get('https://groww-intern-assignment.vercel.app/v1/api/merchant-metadata')
-    //   .then(response => setMerchantMetadata(response.data))
-    //   .catch(error => console.error('Error fetching merchant metadata:', error));
   }, []);
-
-  // useEffect(()=>{
-  //   localStorage.clear();
-  //   const fetchMerchantMetaDataDetails = async () => {
-  //       try {
-  //         const cachedMerchantMetadata = localStorage.getItem('merchantMetaData');
-  //         if (cachedMerchantMetadata) {
-  //           const parsedMerchantMetaData = JSON.parse(cachedMerchantMetadata);
-  //           setMerchantMetadata(parsedMerchantMetaData);
-  //         }
-  //         else{
-  //         // Fetch order details from the API
-  //         const response = await axios.get('https://groww-intern-assignment.vercel.app/v1/api/merchant-metadata');
-  //         const newMerchantMetaData = response.data;
-  //         setMerchantMetadata(newMerchantMetaData);
-  //         localStorage.setItem('merchantMetaData', JSON.stringify(newMerchantMetaData));
-  //         }
-  //       } catch (error) {
-  //         console.error('Error fetching or caching Merchant Meta Data details:', error);
-  //       }
-  //     };
-
-  //     // Fetch order details and handle caching
-  //     fetchMerchantMetaDataDetails();
-  // },[])
-
-  // useEffect(() => {
-  //   // Fetch order details from the provided API
-  //   axios.get('https://groww-intern-assignment.vercel.app/v1/api/order-details')
-  //     .then(response => {
-  //       setOrderDetails(response.data)
-  //       setTotal(Math.round(response.data.products.reduce((acc, product) => acc + product.price * product.quantity, 0)));
-  //       setOrderAmount(Math.round(response.data.products.reduce((acc, product) => acc + product.price * product.quantity, 0)));
-  //   })
-  //     .catch(error => console.error('Error fetching order details:', error));
-
-  //   // Fetch merchant metadata for theming
-  //   axios.get('https://groww-intern-assignment.vercel.app/v1/api/merchant-metadata')
-  //     .then(response => setMerchantMetadata(response.data))
-  //     .catch(error => console.error('Error fetching merchant metadata:', error));
-  // }, []);
-
-  const handleApplyPromo = () => {
-    // Handle applying promo code logic here
-    // You can make an API call or apply logic based on your requirements
-    const newTotal = Math.round(
-      (orderDetails.products.reduce(
-        (acc, product) => acc + product.price * product.quantity,
-        0
-      ) *
-        (100 - 10 * parseInt(promoCode))) /
-        100
-    );
-    setTotal(newTotal);
-    localStorage.setItem("total", newTotal);
-    setAppliedPromo(true);
-  };
-
-  const handleRemovePromo = () => {
-    // Handle applying promo code logic here
-    // You can make an API call or apply logic based on your requirements
-    const newTotal = Math.round(
-      orderDetails.products.reduce(
-        (acc, product) => acc + product.price * product.quantity,
-        0
-      )
-    );
-    setTotal(newTotal);
-    localStorage.setItem("total", newTotal);
-    setAppliedPromo(false);
-  };
-
-  const handleplus = (productId) => {
-    // Handle quantity increase logic here
-    const updatedProducts = orderDetails.products.map((product) => {
-      if (product.id === productId) {
-        return { ...product, quantity: product.quantity + 1 };
-      }
-      return product;
-    });
-
-    setOrderDetails({ ...orderDetails, products: updatedProducts });
-    setTotal(
-      Math.round(
-        updatedProducts.reduce(
-          (acc, product) => acc + product.price * product.quantity,
-          0
-        )
-      )
-    );
-    setOrderAmount(
-      Math.round(
-        updatedProducts.reduce(
-          (acc, product) => acc + product.price * product.quantity,
-          0
-        )
-      )
-    );
-  };
-
-  const handleminus = (productId) => {
-    // Handle quantity decrease logic here
-    const updatedProducts = orderDetails.products.map((product) => {
-      if (product.id === productId && product.quantity > 1) {
-        return { ...product, quantity: product.quantity - 1 };
-      } else if (product.id === productId && product.quantity === 1) {
-        // Remove the product with quantity 1
-        return null; // Returning null will exclude the product from the updatedProducts array
-      }
-      return product;
-    });
-
-    // Filter out null values to remove the product with quantity 1
-    const filteredProducts = updatedProducts.filter(
-      (product) => product !== null
-    );
-
-    setOrderDetails({ ...orderDetails, products: filteredProducts });
-    setTotal(
-      Math.round(
-        filteredProducts.reduce(
-          (acc, product) => acc + product.price * product.quantity,
-          0
-        )
-      )
-    );
-    setOrderAmount(
-      Math.round(
-        filteredProducts.reduce(
-          (acc, product) => acc + product.price * product.quantity,
-          0
-        )
-      )
-    );
-  };
 
   const handlePayment = () => {
     // alert("Your payment has been processed successfully!");
@@ -289,7 +131,7 @@ const OrderConfirmationPage = () => {
           >
             <img
               //src={merchantMetadata.merchantLogo}
-src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSzkiv6IViZX6uViea97vb4eGEAY-jDAm-Rml8EwhSOw&s"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSzkiv6IViZX6uViea97vb4eGEAY-jDAm-Rml8EwhSOw&s"
               alt={merchantMetadata.merchantName}
               style={{
                 maxWidth: "7vmin",
@@ -342,25 +184,24 @@ src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSzkiv6IViZX6uViea97v
                 <p style={{ color: themeStyles["--background"] }}>
                   163 Seymour Junction, Flatleyborough, FL 83131-5020<br></br>
                 </p>
-                    <div style={{display:'flex',flexDirection:'row'}}>
-                <p style={{fontSize:'1.5vmax'}}>&#128222;</p>
-                <input
-                  type="number"
-                  id="amount"
-                  value="9346184951"
-                  maxLength="2vmin"
-                  onChange={(e) =>
-                    setUpiDetails({ ...upiDetails, amount: e.target.value })
-                  }
-                  required
-                  readOnly // Add the readOnly attribute here
-                  style={{
-                    marginBottom: "1vmin",
-                    maxLength: "2vmin",
-                    fontSize: "2vmax"
-                  }}
-                />
-                
+                <div style={{ display: "flex", flexDirection: "row" }}>
+                  <p style={{ fontSize: "1.5vmax" }}>&#128222;</p>
+                  <input
+                    type="number"
+                    id="amount"
+                    value="9346184951"
+                    maxLength="2vmin"
+                    onChange={(e) =>
+                      setUpiDetails({ ...upiDetails, amount: e.target.value })
+                    }
+                    required
+                    readOnly 
+                    style={{
+                      marginBottom: "1vmin",
+                      maxLength: "2vmin",
+                      fontSize: "2vmax",
+                    }}
+                  />
                 </div>
               </div>
               <div

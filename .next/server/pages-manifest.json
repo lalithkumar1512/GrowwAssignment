@@ -4,5 +4,7 @@
   "/_document": "pages/_document.js",
   "/payment": "pages/payment.js",
   "/": "pages/index.js",
-  "/thanks": "pages/thanks.js"
+  "/orderconfirmation": "pages/orderconfirmation.js",
+  "/thanks": "pages/thanks.js",
+  "/api/razorpay": "pages/api/razorpay.js"
 }
