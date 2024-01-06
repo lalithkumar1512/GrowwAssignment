@@ -152,7 +152,7 @@ const OrderConfirmationPage = () => {
           <h1
             style={{
               margin: "0",
-              fontSize: "3.5vmin",
+              fontSize: "4.5vmin",
               color: themeStyles["--background"],
               textAlign: "center",
             }}
@@ -351,7 +351,7 @@ const OrderConfirmationPage = () => {
                 <h2
                   style={{
                     color: themeStyles["--background"],
-                    fontSize: "3vmin",
+                    fontSize: "4vmin",
                     marginRight: "auto",
                   }}
                 >
