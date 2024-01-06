@@ -70,35 +70,9 @@ const PaymentPage = () => {
     amount: total,
   });
 
-  // const handleUpiSubmit = (event) => {
-  //   event.preventDefault();
-
-  //   if (!upiDetails.upiId.trim()) {
-  //     alert("UPI ID cannot be empty");
-  //     return;
-  //   }
-  //   setShowPaymentSuccess(true);
-  //   console.log("UPI Details:", upiDetails);
-  // };
-
-  // const handleCardSubmit = (event) => {
-  //   event.preventDefault();
-
-  //   if (!upiDetails.cardId.trim()) {
-  //     alert("Card ID cannot be empty");
-  //     return;
-  //   }
-  //   if (!upiDetails.cv.trim()) {
-  //     alert("CV cannot be empty");
-  //     return;
-  //   }
-  //   setPayment("Card");
-  //   setShowPaymentSuccess(true);
-  //   console.log("UPI Details:", upiDetails);
-  // };
 
   const handleClosePaymentSuccess = () => {
-    // setShowPaymentSuccess(false);
+    setShowPaymentSuccess(false);
     router.push("/orderconfirmation");
   };
 
@@ -108,17 +82,18 @@ const PaymentPage = () => {
         id="razorpay-checkout-js"
         src="https://checkout.razorpay.com/v1/checkout.js"
       />
-      <div
-        className="payment-container"
-        style={{
-          backgroundColor: themeStyles["--primary"],
-          width: "100%",
-          height: "100%",
-          display: "flex",
-          flexDirection: "column",
-          minHeight: "100vh",
-        }}
-      >
+     <div
+  className="payment-container"
+  style={{
+    backgroundColor: themeStyles["--primary"],
+    width: "100%",
+    minHeight: "100vh",
+    display: "flex",
+    flexDirection: "column",
+    overflowY: "auto",
+  }}
+>
+
         {merchantMetadata && (
           <div
             className="theme-layer"
@@ -126,11 +101,12 @@ const PaymentPage = () => {
               borderRadius: "0.5rem",
               backgroundColor: themeStyles["--foreground"],
               width: "80%",
+              height:'max-content',
               padding: "4%",
               margin: "5%",
               display: "flex",
               flexDirection: "column",
-              minHeight: "100vh",
+              minHeight: "max-content",
             }}
           >
             <div

@@ -122,7 +122,7 @@ const OrderConfirmationPage = () => {
             margin: "5%",
             display: "flex",
             flexDirection: "column",
-            minHeight: "100vh",
+            minHeight: "max-content",
           }}
         >
           <div
